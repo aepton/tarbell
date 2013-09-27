@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Install &mdash; Tarbell 0.9 documentation</title>
+    <title>Install Tarbell &mdash; Tarbell 0.8 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.9',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Tarbell 0.9 documentation" href="index.html" />
+    <link rel="top" title="Tarbell 0.8 documentation" href="index.html" />
     <link rel="next" title="Create" href="create.html" />
     <link rel="prev" title="Welcome to Tarbell’s documentation!" href="index.html" /> 
   </head>
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="index.html" title="Welcome to Tarbell’s documentation!"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Tarbell 0.9 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Tarbell 0.8 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,9 +46,20 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="install">
-<h1>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h1>
-<p>I am installing!</p>
+  <div class="section" id="install-tarbell">
+<h1>Install Tarbell<a class="headerlink" href="#install-tarbell" title="Permalink to this headline">¶</a></h1>
+<p>Clone repository, install virtual environment, install requirements, configure your system for Amazon S3, and run a test server.</p>
+<p>Tarbell is a Python library based on Flask which powers static sites. Truth be told, it doesn&#8217;t do much on its own except read a directory and render templates in any subdirectory it finds a config.py file. To see Tarbell in action, you should probably start with the Tarbell template, which sets up an Amazon S3 publishing workflow and basic framework for building modern web apps using Tarbell.</p>
+<p>Make sure you have python (2.6+), git, pip, virtualenv and virtualenv-wrapper installed on your system.</p>
+<p>git clone <a class="reference external" href="https://github.com/newsapps/tarbell">https://github.com/newsapps/tarbell</a>
+cd tarbell
+mkvirtualenv tarbell
+pip install -r requirements.txt
+python runserver.py
+Now visit <a class="reference external" href="http://localhost:5000/readme">http://localhost:5000/readme</a> in your browser. You should see the latest version of this page.</p>
+<p>How do I install these tools on my system?</p>
+<p>For a very basic guide, see the Chicago Birthrates installation docs.</p>
+<p>For more detailed, Mac-specific information, see Brian Boyer&#8217;s Lion dev environment notes.</p>
 </div>
 
 
@@ -94,7 +105,7 @@
         <li class="right" >
           <a href="index.html" title="Welcome to Tarbell’s documentation!"
              >previous</a> |</li>
-        <li><a href="index.html">Tarbell 0.9 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Tarbell 0.8 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
