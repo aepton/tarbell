@@ -101,61 +101,61 @@ time you it with user input highlighted.
     Authenticating your Google account to use Tarbell. If any services are running on
     port 8080, disable them and run this command again.
 
-Your browser has been opened to visit:
+    Your browser has been opened to visit:
 
-    https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.file&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&response_type=code&client_id=000000000000.apps.googleusercontent.com&access_type=offline
+        https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.file&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&response_type=code&client_id=000000000000.apps.googleusercontent.com&access_type=offline
 
-If your browser is on a different machine then exit and re-run this
-application with the command-line parameter 
+    If your browser is on a different machine then exit and re-run this
+    application with the command-line parameter 
 
-  --noauth_local_webserver
+        --noauth_local_webserver
 
-Authentication successful.
-Success! View the spreadsheet at https://docs.google.com/spreadsheet/ccc?key=BIGLONGSPREADSHEETKEY90xlk39102k4
+    Authentication successful.
+    Success! View the spreadsheet at https://docs.google.com/spreadsheet/ccc?key=BIGLONGSPREADSHEETKEY90xlk39102k4
 
-This spreadsheet is published in public on the web. To make it private
-you'll need to configure the project's secrets.py file, disable
-publishing using the 'Publish to the web' settings from the file menu,
-and share the document with the account specified in secrets.py.
+    This spreadsheet is published in public on the web. To make it private
+    you'll need to configure the project's secrets.py file, disable
+    publishing using the 'Publish to the web' settings from the file menu,
+    and share the document with the account specified in secrets.py.
 
-Created /Users/davideads/Repos/tarbell/awesomeproject/config.py
-Created /Users/davideads/Repos/tarbell/awesomeproject/secrets.py
-Created directory /Users/davideads/Repos/tarbell/awesomeproject/static/css
-Created /Users/davideads/Repos/tarbell/awesomeproject/static/css/style.css
-Created directory /Users/davideads/Repos/tarbell/awesomeproject/static/js
-Created /Users/davideads/Repos/tarbell/awesomeproject/static/js/app.js
-Created directory /Users/davideads/Repos/tarbell/awesomeproject/templates
-Created /Users/davideads/Repos/tarbell/awesomeproject/templates/index.html
-Would you like to create a new branch and initial commit for this project? [Y/n]: y
-[localhost] local: git checkout master;                     
-git checkout -b awesomeproject
-M   fabfile.py
-M   readme/docs/create.md
-Already on 'master'
-M   fabfile.py
-M   readme/docs/create.md
-Switched to a new branch 'awesomeproject'
-[localhost] local: git add awesomeproject
-[localhost] local: git commit -m "Started new project awesomeproject"
-[awesomeproject cc2502a] Started new project awesomeproject
- 5 files changed, 212 insertions(+), 0 deletions(-)
- create mode 100644 awesomeproject/config.py
- create mode 100644 awesomeproject/secrets.py
- create mode 100644 awesomeproject/static/css/style.css
- create mode 100644 awesomeproject/static/js/app.js
- create mode 100644 awesomeproject/templates/index.html
+    Created /Users/davideads/Repos/tarbell/awesomeproject/config.py
+    Created /Users/davideads/Repos/tarbell/awesomeproject/secrets.py
+    Created directory /Users/davideads/Repos/tarbell/awesomeproject/static/css
+    Created /Users/davideads/Repos/tarbell/awesomeproject/static/css/style.css
+    Created directory /Users/davideads/Repos/tarbell/awesomeproject/static/js
+    Created /Users/davideads/Repos/tarbell/awesomeproject/static/js/app.js
+    Created directory /Users/davideads/Repos/tarbell/awesomeproject/templates
+    Created /Users/davideads/Repos/tarbell/awesomeproject/templates/index.html
+    Would you like to create a new branch and initial commit for this project? [Y/n]: y
+    [localhost] local: git checkout master;                     
+    git checkout -b awesomeproject
+    M   fabfile.py
+    M   readme/docs/create.md
+    Already on 'master'
+    M   fabfile.py
+    M   readme/docs/create.md
+    Switched to a new branch 'awesomeproject'
+    [localhost] local: git add awesomeproject
+    [localhost] local: git commit -m "Started new project awesomeproject"
+    [awesomeproject cc2502a] Started new project awesomeproject
+     5 files changed, 212 insertions(+), 0 deletions(-)
+     create mode 100644 awesomeproject/config.py
+     create mode 100644 awesomeproject/secrets.py
+     create mode 100644 awesomeproject/static/css/style.css
+     create mode 100644 awesomeproject/static/js/app.js
+     create mode 100644 awesomeproject/templates/index.html
 
-Welcome to Awesome project. Great work! What's next?
+    Welcome to Awesome project. Great work! What's next?
 
-- Edit awesomeproject/config.py to set up template values and adjust project settings.
-- Edit awesomeproject/secrets.py to configure Google spreadsheet authentication variables.
-- Edit awesomeproject/templates/index.html to edit your default template.
-- Edit awesomeproject/static/js/app.js to edit your default Javascript app.
-- Run `python runserver.py` and view your project at http://localhost:5000/awesomeproject/
+    - Edit awesomeproject/config.py to set up template values and adjust project settings.
+    - Edit awesomeproject/secrets.py to configure Google spreadsheet authentication variables.
+    - Edit awesomeproject/templates/index.html to edit your default template.
+    - Edit awesomeproject/static/js/app.js to edit your default Javascript app.
+    - Run `python runserver.py` and view your project at http://localhost:5000/awesomeproject/
 
-Run `fab deploy` and `fab project:projectname deploy` to deploy to S3 if you have a bucket configured.
+    Run `fab deploy` and `fab project:projectname deploy` to deploy to S3 if you have a bucket configured.
 
-Done.
+    Done.
 
 Manually creating Google Spreadsheets
 =====================================
