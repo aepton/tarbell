@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Create &mdash; Tarbell 0.8 documentation</title>
+    <title>Create a Project &mdash; Tarbell 0.8 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -46,9 +46,115 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="create">
-<h1>Create<a class="headerlink" href="#create" title="Permalink to this headline">¶</a></h1>
-<p>I am creating!</p>
+  <div class="section" id="create-a-project">
+<h1>Create a Project<a class="headerlink" href="#create-a-project" title="Permalink to this headline">¶</a></h1>
+<p><em>Get the ``client_secrets.json`` file if you don&#8217;t have it already. Use the
+``fab newproject`` command to kick off a new project by copying a basic project
+structure and setting up a Google spreadsheet.</em></p>
+<div class="section" id="prerequisite-authenticating-with-google-with-client-secrets-json">
+<h2>Prerequisite: Authenticating with Google with client_secrets.json<a class="headerlink" href="#prerequisite-authenticating-with-google-with-client-secrets-json" title="Permalink to this headline">¶</a></h2>
+<p>Tarbell uses the Google Drive API to create new spreadsheets, which requires
+going through a little OAuth2 song-and-dance. This is optional but highly
+recommended, in part because Tarbell will probably use this technique for all
+authentication and access in the future. If you want to skip this step and
+configure your spreadsheet manually, see Manually creating Google spreadsheets.</p>
+<p>You ready? Let&#8217;s go.</p>
+<p>In order to allow Tarbell to create new Google Spreadsheets, you&#8217;ll need to
+download a <a class="reference external" href="https://developers.google.com/api-client-library/python/guide/aaa_client_secrets">client_secrets.json file</a>
+to access the Google Drive API. You can share this file with collaborators and
+within your organization, but do not share this file anywhere public.</p>
+<p>Log in to the <a class="reference external" href="https://code.google.com/apis/console/">Google API Developer Console</a> and create a new project:</p>
+<img alt="_images/create_1.png" src="_images/create_1.png" />
+<p>Create client screenshot</p>
+<p>Now click the &#8220;Services&#8221; tab and enable Google Drive API.</p>
+<p>Enable Drive API</p>
+<p>Click the &#8220;API Access&#8221; tab to create a client ID:</p>
+<p>Create client ID</p>
+<p>Add some project details. These don&#8217;t really matter:</p>
+<p>Client ID details screen</p>
+<p>This is the important screen. Select &#8220;installed app&#8221; and &#8220;other&#8221;:</p>
+<p>Create ID important screen</p>
+<p>Whew! Now you can download the client_secrets.json file:</p>
+<p>Download client_secrets.json</p>
+<p>Now put the file in the root directory of your Tarbell installation.</p>
+<p>The first time you run fab newproject and answer yes to create a Google spreadsheet, your default browser will open and you will be prompted to grant your Tarbell client access to your API key.</p>
+<p>Grant client access</p>
+<p>The fab newproject command will prompt you if the client_secrets.json file doesn&#8217;t exist.</p>
+<p>The first time you create a new project and spreadsheet, make sure you are not running any services on port 8080, such as MAMP. The Python Google API client library fires up a tiny little server on port 8080 to receive and store an access token during this cycle. Because the access token is stored, you won&#8217;t need to do again unless your token is revoked. You can restore any port 8080 services indefinitely.</p>
+<p>Help us improve! We know this step is a little rocky. We&#8217;d like to make it smoother. If you are an OAuth or Google Drive API expert, we need your help. See #21 Improve OAuth workflow for newproject command and #22 Use Drive API in Tarbell library.</p>
+<p>Create a project</p>
+<p>To create your first project, use the handy fab command:</p>
+<p>fab newproject
+You&#8217;ll be prompted with a series of questions. Here&#8217;s what you&#8217;ll see the first time you it with user input highlighted.</p>
+<p>What is the directory name for the project? awesomeproject
+What is your project&#8217;s full title? Awesome project
+Do you want a Google doc associated with this project? [Y/n]: y
+Generating Google spreadsheet
+What Google account should have access to this spreadsheet initially? (e.g. <a class="reference external" href="mailto:my&#46;name&#37;&#52;&#48;gmail&#46;com">my<span>&#46;</span>name<span>&#64;</span>gmail<span>&#46;</span>com</a>) <a class="reference external" href="mailto:somebody&#37;&#52;&#48;gmail&#46;com">somebody<span>&#64;</span>gmail<span>&#46;</span>com</a>
+Authenticating your Google account to use Tarbell. If any services are running on
+port 8080, disable them and run this command again.</p>
+<p>Your browser has been opened to visit:</p>
+<blockquote>
+<div><a class="reference external" href="https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.file&amp;redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&amp;response_type=code&amp;client_id=000000000000.apps.googleusercontent.com&amp;access_type=offline">https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.file&amp;redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&amp;response_type=code&amp;client_id=000000000000.apps.googleusercontent.com&amp;access_type=offline</a></div></blockquote>
+<p>If your browser is on a different machine then exit and re-run this
+application with the command-line parameter</p>
+<blockquote>
+<div>&#8211;noauth_local_webserver</div></blockquote>
+<p>Authentication successful.
+Success! View the spreadsheet at <a class="reference external" href="https://docs.google.com/spreadsheet/ccc?key=BIGLONGSPREADSHEETKEY90xlk39102k4">https://docs.google.com/spreadsheet/ccc?key=BIGLONGSPREADSHEETKEY90xlk39102k4</a></p>
+<p>This spreadsheet is published in public on the web. To make it private
+you&#8217;ll need to configure the project&#8217;s secrets.py file, disable
+publishing using the &#8216;Publish to the web&#8217; settings from the file menu,
+and share the document with the account specified in secrets.py.</p>
+<p>Created /Users/davideads/Repos/tarbell/awesomeproject/config.py
+Created /Users/davideads/Repos/tarbell/awesomeproject/secrets.py
+Created directory /Users/davideads/Repos/tarbell/awesomeproject/static/css
+Created /Users/davideads/Repos/tarbell/awesomeproject/static/css/style.css
+Created directory /Users/davideads/Repos/tarbell/awesomeproject/static/js
+Created /Users/davideads/Repos/tarbell/awesomeproject/static/js/app.js
+Created directory /Users/davideads/Repos/tarbell/awesomeproject/templates
+Created /Users/davideads/Repos/tarbell/awesomeproject/templates/index.html
+Would you like to create a new branch and initial commit for this project? [Y/n]: y
+[localhost] local: git checkout master;
+git checkout -b awesomeproject
+M   fabfile.py
+M   readme/docs/create.md
+Already on &#8216;master&#8217;
+M   fabfile.py
+M   readme/docs/create.md
+Switched to a new branch &#8216;awesomeproject&#8217;
+[localhost] local: git add awesomeproject
+[localhost] local: git commit -m &#8220;Started new project awesomeproject&#8221;
+[awesomeproject cc2502a] Started new project awesomeproject</p>
+<blockquote>
+<div>5 files changed, 212 insertions(+), 0 deletions(-)
+create mode 100644 awesomeproject/config.py
+create mode 100644 awesomeproject/secrets.py
+create mode 100644 awesomeproject/static/css/style.css
+create mode 100644 awesomeproject/static/js/app.js
+create mode 100644 awesomeproject/templates/index.html</div></blockquote>
+<p>Welcome to Awesome project. Great work! What&#8217;s next?</p>
+<ul class="simple">
+<li>Edit awesomeproject/config.py to set up template values and adjust project settings.</li>
+<li>Edit awesomeproject/secrets.py to configure Google spreadsheet authentication variables.</li>
+<li>Edit awesomeproject/templates/index.html to edit your default template.</li>
+<li>Edit awesomeproject/static/js/app.js to edit your default Javascript app.</li>
+<li>Run <cite>python runserver.py</cite> and view your project at <a class="reference external" href="http://localhost:5000/awesomeproject/">http://localhost:5000/awesomeproject/</a></li>
+</ul>
+<p>Run <cite>fab deploy</cite> and <cite>fab project:projectname deploy</cite> to deploy to S3 if you have a bucket configured.</p>
+<p>Done.
+Manually creating Google Spreadsheets</p>
+<p>To manually set up a Google spreadsheet for your project:</p>
+<p>Create a new Google spreadsheet
+Rename &#8220;Sheet1&#8221; to &#8220;values&#8221;
+Add &#8216;key&#8217; and &#8216;value&#8217; column headers in the first row
+Add the spreadsheet key in projectname/config.py
+Public access:
+Set the spreadsheet to &#8216;publish to the web&#8217;
+Private access:
+Grant access to a special user account (you&#8217;ll be storing password in the clear, so set up a new account for this)
+Add credentials to projectname/secrets.py</p>
+</div>
 </div>
 
 
@@ -57,6 +163,14 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Create a Project</a><ul>
+<li><a class="reference internal" href="#prerequisite-authenticating-with-google-with-client-secrets-json">Prerequisite: Authenticating with Google with client_secrets.json</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="install.html"
                         title="previous chapter">Install Tarbell</a></p>
