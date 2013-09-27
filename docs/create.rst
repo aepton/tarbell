@@ -172,3 +172,4 @@ To manually set up a Google spreadsheet for your project:
         -Grant access to a special user account (you'll be storing password in
         the clear, so set up a new account for this)
         -Add credentials to projectname/secrets.py
+
