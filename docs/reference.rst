@@ -11,6 +11,7 @@ directory, which lets Tarbell find your project. This file can be empty, but
 also accepts several configuration options:
 
     - ``GOOGLE_DOC``: A dict of Google docs parameters to access a spreadsheet.
+
     Takes ``key``, ``account``, and ``password`` parameters.
 
     The default template stores account and password variables in a file called
