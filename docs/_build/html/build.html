@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Build &mdash; Tarbell 0.8 documentation</title>
+    <title>Build a Project &mdash; Tarbell 0.8 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Tarbell 0.8 documentation" href="index.html" />
     <link rel="next" title="Publish" href="publish.html" />
-    <link rel="prev" title="Create" href="create.html" /> 
+    <link rel="prev" title="Create a Project" href="create.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,7 +35,7 @@
           <a href="publish.html" title="Publish"
              accesskey="N">next</a></li>
         <li class="right" >
-          <a href="create.html" title="Create"
+          <a href="create.html" title="Create a Project"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">Tarbell 0.8 documentation</a> &raquo;</li> 
       </ul>
@@ -46,9 +46,154 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="build">
-<h1>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h1>
-<p>I am building!</p>
+  <div class="section" id="build-a-project">
+<h1>Build a Project<a class="headerlink" href="#build-a-project" title="Permalink to this headline">¶</a></h1>
+<p><em>Project layout, edit templates and manage Google spreadsheet, tweak CSS, and
+take a peek at the Javascript app.</em></p>
+<p>Now that you&#8217;ve created a new project, let&#8217;s look at how Tarbell projects are
+constructed.</p>
+<div class="section" id="project-layout">
+<h2>Project layout<a class="headerlink" href="#project-layout" title="Permalink to this headline">¶</a></h2>
+<p>A Tarbell template project directory structure looks like this:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">config.py</span></tt>: Configuration file. Required to detect the project.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">secrets.py</span></tt>: Set <tt class="docutils literal"><span class="pre">GOOGLE_AUTH</span></tt> variable to configure authentication.
+Not tracked by Git.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">templates</span></tt>: The templates directory contains Jinja templates that will
+be published at <tt class="docutils literal"><span class="pre">/projectname/TEMPLATENAME.html</span></tt>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">index.html</span></tt>: A basic template to start building with.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">static</span></tt>: The static directory contains static assets like images, CSS,
+and Javascript. They are published at <tt class="docutils literal"><span class="pre">/projectname/FILENAME</span></tt>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">js/app.js</span></tt>: An skeleton Javascript application for your project
+that is automatically loaded by base template.</li>
+<li><tt class="docutils literal"><span class="pre">css/style.css</span></tt>: An empty stylesheet for your project.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="what-s-the-difference-between-static-assets-and-templates">
+<h2>What&#8217;s the difference between static assets and templates?<a class="headerlink" href="#what-s-the-difference-between-static-assets-and-templates" title="Permalink to this headline">¶</a></h2>
+<p>Static assets are simply served as-is, while templates are provided with
+context variables and rendered using Jinja.</p>
+</div>
+<div class="section" id="editing-templates">
+<h2>Editing templates<a class="headerlink" href="#editing-templates" title="Permalink to this headline">¶</a></h2>
+<p>Every file that ends in <tt class="docutils literal"><span class="pre">.html</span></tt> in <tt class="docutils literal"><span class="pre">projectname/templates</span></tt> will be
+published to <tt class="docutils literal"><span class="pre">projectname/TEMPLATENAME.html</span></tt> and can be previewed at
+<a class="reference external" href="http://localhost:5000/projectname/TEMPLATENAME.html">http://localhost:5000/projectname/TEMPLATENAME.html</a>.</p>
+<div class="section" id="template-basics">
+<h3>Template basics<a class="headerlink" href="#template-basics" title="Permalink to this headline">¶</a></h3>
+<p>Tarbell uses <a class="reference external" href="http://jinja.pocoo.org/docs/">Jinja2</a> for templating and
+supports all Jinja2 features.</p>
+<p>A basic template looks like:</p>
+<div class="highlight-python"><pre>{% extends '_base.html' %}
+
+{% block css %}
+{{ super() }} {# Load base styles #}
+&lt;link rel="stylesheet" type="text/css"
+    href="{{ static_url('MYPROJECT', '/css/style.css') }}" /&gt;
+{% endblock css %}
+
+{% block content %}
+&lt;h1&gt;{{ title }}&lt;/h1&gt;
+&lt;p class="credit"&gt;{{ credit }}&lt;/p&gt;
+{{ body|process_text }}
+{% endblock content %}</pre>
+</div>
+</div>
+</div>
+<div class="section" id="what-s-base-html">
+<h2>What&#8217;s <tt class="docutils literal"><span class="pre">_base.html</span></tt>?<a class="headerlink" href="#what-s-base-html" title="Permalink to this headline">¶</a></h2>
+<p>The Tarbell template comes with a base template file that sets up some simple
+blocks and manages Javascript app loading.</p>
+<div class="section" id="the-static-url-template-function">
+<h3>The <tt class="docutils literal"><span class="pre">static_url()</span></tt> template function<a class="headerlink" href="#the-static-url-template-function" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">static_url(projectname,</span> <span class="pre">path)</span></tt> function constructs the path to an asset
+stored under <tt class="docutils literal"><span class="pre">projectname/static</span></tt> based on the project&#8217;s output URL.</p>
+</div>
+<div class="section" id="working-with-google-spreadsheets-the-values-worksheet">
+<h3>Working with Google spreadsheets: The &#8220;values&#8221; worksheet<a class="headerlink" href="#working-with-google-spreadsheets-the-values-worksheet" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>values</strong> worksheet must have &#8220;key&#8221; and &#8220;value&#8221; columns. These key-value
+pairs will be provided as global variables to templates. So if there&#8217;s a row
+with a key column value of &#8220;foo&#8221; and a value of &#8220;bar&#8221;, <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">foo</span> <span class="pre">}}</span></tt> in a
+template will print <tt class="docutils literal"><span class="pre">bar</span></tt>.</p>
+</div>
+<div class="section" id="working-with-google-spreadsheets-other-worksheets">
+<h3>Working with Google spreadsheets: Other worksheets<a class="headerlink" href="#working-with-google-spreadsheets-other-worksheets" title="Permalink to this headline">¶</a></h3>
+<p>Other worksheets can hold freeform data, namespaced by the worksheet name.
+Unlike the <strong>values</strong> worksheet, data in these worksheets can be accessed by
+iterating through a list or, if a column named &#8220;key&#8221; is present, by reference
+to the value in that column. Some examples with a worksheet named <strong>updates</strong>
+should help make this clear.</p>
+</div>
+<div class="section" id="a-worksheet-called-updates">
+<h3>A worksheet called &#8220;updates&#8221;<a class="headerlink" href="#a-worksheet-called-updates" title="Permalink to this headline">¶</a></h3>
+<p>key     title                   date            url
+======  ================    ==========  ==================================================
+hadiya  Hadiya&#8217;s friends        05-05-2013      <a class="reference external" href="http://graphics.chicagotribune.com/hadiyas-friends">http://graphics.chicagotribune.com/hadiyas-friends</a>
+grace   His Saving Grace        02-14-2013      <a class="reference external" href="http://graphics.chicagotribune.com/grace">http://graphics.chicagotribune.com/grace</a>
+======  ================    ==========  ==================================================</p>
+</div>
+<div class="section" id="get-worksheet-values-in-template">
+<h3>Get worksheet values in template<a class="headerlink" href="#get-worksheet-values-in-template" title="Permalink to this headline">¶</a></h3>
+<p>The worksheet will be passed to your context as an iterable list, with each
+column in the worksheet representing a separate item in the context dictionary.
+So in your template, the following code displays the contents of each row in
+your spreadsheet:</p>
+<div class="highlight-python"><pre>{% for row in updates %}
+&lt;p&gt; &lt;a href="{{ row.url }}"&gt;{{ row.title }}&lt;/a&gt; &lt;/p&gt;
+{% endfor %}</pre>
+</div>
+</div>
+<div class="section" id="directly-accessing-a-row">
+<h3>Directly accessing a row<a class="headerlink" href="#directly-accessing-a-row" title="Permalink to this headline">¶</a></h3>
+<p>If there&#8217;s a header named &#8220;key&#8221; that contains only unique, simple string values
+we can directly access individual rows in that worksheet:</p>
+<div class="highlight-python"><pre>&lt;p&gt; &lt;a href="{{ updates.grace.url }}"&gt;{{ updates.grace.title }}&lt;/a&gt; &lt;/p&gt;</pre>
+</div>
+</div>
+</div>
+<div class="section" id="editing-javascript-app">
+<h2>Editing Javascript app<a class="headerlink" href="#editing-javascript-app" title="Permalink to this headline">¶</a></h2>
+<p>Every project comes with a barebones Javascript app in
+<tt class="docutils literal"><span class="pre">projectname/static/js/app.js</span></tt>.</p>
+<p>The app uses RequireJS and provides Backbone, jQuery, and Underscore libraries
+by default.</p>
+<p>Wrap your app code in a <tt class="docutils literal"><span class="pre">require(['dependency',</span> <span class="pre">...],</span> <span class="pre">function(DepObj)</span> <span class="pre">{</span> <span class="pre">...</span>
+<span class="pre">})</span></tt> call to include necessary libraries and modules.</p>
+<div class="highlight-python"><pre>// Additional RequireJS configuration
+require.config( {
+    paths: {
+        moment: '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min',
+    },
+} );
+
+// Start our project's app
+require([ 'jquery', 'base/views/NavigationView', 'moment' ],
+function($, NavigationView, moment) {
+    console.log("Creating navigation view");
+    var nav = new NavigationView({
+        el: $('#header'),
+        title: { label: 'Tarbell Readme', url: '#top' },
+    }).render();
+
+    console.log("Demonstrating momentJS:");
+    console.log(new moment());
+});</pre>
+</div>
+</div>
 </div>
 
 
@@ -57,9 +202,32 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Build a Project</a><ul>
+<li><a class="reference internal" href="#project-layout">Project layout</a></li>
+<li><a class="reference internal" href="#what-s-the-difference-between-static-assets-and-templates">What&#8217;s the difference between static assets and templates?</a></li>
+<li><a class="reference internal" href="#editing-templates">Editing templates</a><ul>
+<li><a class="reference internal" href="#template-basics">Template basics</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#what-s-base-html">What&#8217;s <tt class="docutils literal"><span class="pre">_base.html</span></tt>?</a><ul>
+<li><a class="reference internal" href="#the-static-url-template-function">The <tt class="docutils literal"><span class="pre">static_url()</span></tt> template function</a></li>
+<li><a class="reference internal" href="#working-with-google-spreadsheets-the-values-worksheet">Working with Google spreadsheets: The &#8220;values&#8221; worksheet</a></li>
+<li><a class="reference internal" href="#working-with-google-spreadsheets-other-worksheets">Working with Google spreadsheets: Other worksheets</a></li>
+<li><a class="reference internal" href="#a-worksheet-called-updates">A worksheet called &#8220;updates&#8221;</a></li>
+<li><a class="reference internal" href="#get-worksheet-values-in-template">Get worksheet values in template</a></li>
+<li><a class="reference internal" href="#directly-accessing-a-row">Directly accessing a row</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#editing-javascript-app">Editing Javascript app</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="create.html"
-                        title="previous chapter">Create</a></p>
+                        title="previous chapter">Create a Project</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="publish.html"
                         title="next chapter">Publish</a></p>
@@ -92,7 +260,7 @@
           <a href="publish.html" title="Publish"
              >next</a></li>
         <li class="right" >
-          <a href="create.html" title="Create"
+          <a href="create.html" title="Create a Project"
              >previous</a> |</li>
         <li><a href="index.html">Tarbell 0.8 documentation</a> &raquo;</li> 
       </ul>
