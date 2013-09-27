@@ -89,11 +89,12 @@ should help make this clear.
 A worksheet called "updates"
 ----------------------------
 
-key     title    	        date    	url
-======  ================    ==========  ==================================================
-hadiya	Hadiya's friends	05-05-2013	http://graphics.chicagotribune.com/hadiyas-friends
-grace	His Saving Grace	02-14-2013	http://graphics.chicagotribune.com/grace
-======  ================    ==========  ==================================================
+====== ================ ==========  ==================================================
+key    title            date        url
+====== ================ ==========  ==================================================
+hadiya Hadiya's friends 05-05-2013  http://graphics.chicagotribune.com/hadiyas-friends
+grace  His Saving Grace 02-14-2013  http://graphics.chicagotribune.com/grace
+====== ================ ==========  ==================================================
 
 Get worksheet values in template
 --------------------------------
