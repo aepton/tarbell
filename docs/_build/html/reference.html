@@ -51,18 +51,13 @@
 directory, which lets Tarbell find your project. This file can be empty, but
 also accepts several configuration options:</p>
 <blockquote>
-<div><ul>
-<li><dl class="first docutils">
-<dt><tt class="docutils literal"><span class="pre">GOOGLE_DOC</span></tt>: A dict of Google docs parameters to access a spreadsheet.</dt>
-<dd><p class="first">Takes <tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">account</span></tt>, and <tt class="docutils literal"><span class="pre">password</span></tt> parameters.</p>
-<p class="last">The default template stores account and password variables in a file
-called <tt class="docutils literal"><span class="pre">secrets.py</span></tt> in variable called <tt class="docutils literal"><span class="pre">GOOGLE_AUTH</span></tt>. <strong>Use
-secrets.py to keep your authentication information out of version
-control.</strong></p>
-</dd>
-</dl>
-</li>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">GOOGLE_DOC</span></tt>: A dict of Google docs parameters to access a spreadsheet.</li>
 </ul>
+<p>Takes <tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">account</span></tt>, and <tt class="docutils literal"><span class="pre">password</span></tt> parameters.</p>
+<p>The default template stores account and password variables in a file called
+<tt class="docutils literal"><span class="pre">secrets.py</span></tt> in variable called <tt class="docutils literal"><span class="pre">GOOGLE_AUTH</span></tt>. <strong>Use secrets.py to keep
+your authentication information out of version control.</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">GOOGLE_DOC</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;key&#39;</span><span class="p">:</span> <span class="s">&quot;BIGLONGSTRINGOFLETTERSANDNUMBERS&quot;</span><span class="p">,</span>
     <span class="s">&#39;account&#39;</span><span class="p">:</span> <span class="s">&quot;some+account@gmail.com&quot;</span><span class="p">,</span>
