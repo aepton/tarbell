@@ -48,13 +48,13 @@
             
   <div class="section" id="publish-a-project">
 <h1>Publish a Project<a class="headerlink" href="#publish-a-project" title="Permalink to this headline">¶</a></h1>
-<p><strong>Use fab deploy and fab project:&lt;projectname&gt; deploy to upload your project to
-Amazon S3. Customize the publishing process.</strong></p>
+<p><em>Use fab deploy and fab project:&lt;projectname&gt; deploy to upload your project to
+Amazon S3. Customize the publishing process.</em></p>
 <div class="section" id="amazon-s3-setup">
 <h2>Amazon S3 setup<a class="headerlink" href="#amazon-s3-setup" title="Permalink to this headline">¶</a></h2>
 <p>An Amazon S3 publishing workflow is included in the Tarbell template. To use
 it, you&#8217;ll need your <a class="reference external" href="https://portal.aws.amazon.com/gp/aws/developer/account/index.html?action=access-key">Amazon S3 credentials</a>.</p>
-<p>Create a file called <cite>s3config.py</cite> in your Tarbell template directory.</p>
+<p>Create a file called <tt class="docutils literal"><span class="pre">s3config.py</span></tt> in your Tarbell template directory.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">S3CONFIG</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;BUCKETNAME&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">&#39;bucket&#39;</span><span class="p">:</span> <span class="s">&#39;mybucket.domain.com&#39;</span><span class="p">,</span>

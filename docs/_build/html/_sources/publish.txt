@@ -1,9 +1,8 @@
 =================
 Publish a Project
 =================
-
-**Use fab deploy and fab project:<projectname> deploy to upload your project to
-Amazon S3. Customize the publishing process.**
+*Use fab deploy and fab project:<projectname> deploy to upload your project to
+Amazon S3. Customize the publishing process.*
 
 Amazon S3 setup
 ---------------
@@ -12,7 +11,7 @@ An Amazon S3 publishing workflow is included in the Tarbell template. To use
 it, you'll need your `Amazon S3 credentials
 <https://portal.aws.amazon.com/gp/aws/developer/account/index.html?action=access-key>`_.
 
-Create a file called `s3config.py` in your Tarbell template directory.
+Create a file called ``s3config.py`` in your Tarbell template directory.
 
 ::
 
