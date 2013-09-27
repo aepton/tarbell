@@ -27,26 +27,32 @@ Log in to the `Google API Developer Console
 <https://code.google.com/apis/console/>`_ and create a new project:
 
 .. image:: create_1.png
+   :width: 700px
 
 Now click the "Services" tab and enable Google Drive API.
 
 .. image:: create_2.png
+   :width: 700px
 
 Click the "API Access" tab to create a client ID:
 
 .. image:: create_3.png
+   :width: 700px
 
 Add some project details. These don't really matter:
 
 .. image:: create_4.png
+   :width: 700px
 
 This is the important screen. Select "installed app" and "other":
 
 .. image:: create_5.png
+   :width: 700px
 
 Whew! Now you can download the ``client_secrets.json`` file:
 
 .. image:: create_6.png
+   :width: 700px
 
 Now put the file in the root directory of your Tarbell installation.
 
@@ -55,6 +61,7 @@ spreadsheet, your default browser will open and you will be prompted to grant
 your Tarbell client access to your API key.
 
 .. image:: create_7.png
+   :width: 700px
 
 The ``fab newproject`` command will prompt you if the ``client_secrets.json``
 file doesn't exist.
@@ -90,10 +97,8 @@ time you it with user input highlighted.
     What is your project's full title? Awesome project
     Do you want a Google doc associated with this project? [Y/n]: y
     Generating Google spreadsheet
-    What Google account should have access to this spreadsheet initially? (e.g.
-    my.name@gmail.com) somebody@gmail.com
-    Authenticating your Google account to use Tarbell. If any services are
-    running on
+    What Google account should have access to this spreadsheet initially? (e.g. my.name@gmail.com) somebody@gmail.com
+    Authenticating your Google account to use Tarbell. If any services are running on
     port 8080, disable them and run this command again.
 
 Your browser has been opened to visit:
