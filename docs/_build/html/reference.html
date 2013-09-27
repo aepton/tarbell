@@ -50,8 +50,10 @@
 directory, which lets Tarbell find your project. This file can be empty, but
 also accepts several configuration options:</p>
 <blockquote>
-<div><p><tt class="docutils literal"><span class="pre">GOOGLE_DOC</span></tt>: A dict of Google docs parameters to access a spreadsheet.
-Takes <tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">account</span></tt>, and <tt class="docutils literal"><span class="pre">password</span></tt> parameters.</p>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">GOOGLE_DOC</span></tt>: A dict of Google docs parameters to access a spreadsheet.</li>
+</ul>
+<p>Takes <tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">account</span></tt>, and <tt class="docutils literal"><span class="pre">password</span></tt> parameters.</p>
 <p>The default template stores account and password variables in a file
 called <tt class="docutils literal"><span class="pre">secrets.py</span></tt> in variable called <tt class="docutils literal"><span class="pre">GOOGLE_AUTH</span></tt>. <strong>Use secrets.py
 to keep your authentication information out of version control.</strong></p>
@@ -62,17 +64,23 @@ to keep your authentication information out of version control.</strong></p>
 <span class="p">}</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">DEFAULT_CONTEXT</span></tt>: Default context variables to make available to all project templates.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_CONTEXT</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;ad_path&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span>
+    <span class="s">&#39;analytics_path&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">DONT_PUBLISH</span></tt>: If <tt class="docutils literal"><span class="pre">True</span></tt>, this project will not be published to S3.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">DONT_PUBLISH</span><span class="o">=</span><span class="bp">True</span>
+</pre></div>
+</div>
+<p>Default: <tt class="docutils literal"><span class="pre">False</span></tt></p>
 </div></blockquote>
-<p>DEFAULT_CONTEXT: Default context variables to make available to all project templates.</p>
-<dl class="docutils">
-<dt>DEFAULT_CONTEXT = {</dt>
-<dd>&#8216;ad_path&#8217;: &#8216;&#8217;,
-&#8216;analytics_path&#8217;: &#8216;&#8217;,</dd>
-</dl>
-<p>}
-DONT_PUBLISH: If True, this project will not be published to S3.</p>
-<p>DONT_PUBLISH=True
-Default: False</p>
 <p>URL_ROOT: Override the published URL to differ from the directory name.</p>
 <p>URL_ROOT=&#8217;totally-awesome-project&#8217;
 Default: None (publish using name of directory)</p>

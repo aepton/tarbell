@@ -9,7 +9,7 @@ When your project was created, a ``config.py`` file was created in the project
 directory, which lets Tarbell find your project. This file can be empty, but
 also accepts several configuration options:
 
-    ``GOOGLE_DOC``: A dict of Google docs parameters to access a spreadsheet.
+    - ``GOOGLE_DOC``: A dict of Google docs parameters to access a spreadsheet.
     Takes ``key``, ``account``, and ``password`` parameters.
 
     The default template stores account and password variables in a file
@@ -24,16 +24,22 @@ also accepts several configuration options:
             'password': "++GmailPassWord++",
         }
 
-DEFAULT_CONTEXT: Default context variables to make available to all project templates.
+    - ``DEFAULT_CONTEXT``: Default context variables to make available to all project templates.
 
-DEFAULT_CONTEXT = {
-    'ad_path': '',
-    'analytics_path': '',
-}
-DONT_PUBLISH: If True, this project will not be published to S3.
+    ::
 
-DONT_PUBLISH=True
-Default: False
+        DEFAULT_CONTEXT = {
+            'ad_path': '',
+            'analytics_path': '',
+        }
+
+    - ``DONT_PUBLISH``: If ``True``, this project will not be published to S3.
+
+    ::
+
+        DONT_PUBLISH=True
+
+    Default: ``False``
 
 URL_ROOT: Override the published URL to differ from the directory name.
 
