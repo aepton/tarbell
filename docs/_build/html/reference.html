@@ -45,18 +45,24 @@
   <div class="section" id="reference">
 <h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
 <p><em>Configure Tarbell, set up a Flask Blueprint, special base project.</em></p>
-<p>Configuring Tarbell</p>
+<div class="section" id="configuring-tarbell">
+<h2>Configuring Tarbell<a class="headerlink" href="#configuring-tarbell" title="Permalink to this headline">¶</a></h2>
 <p>When your project was created, a <tt class="docutils literal"><span class="pre">config.py</span></tt> file was created in the project
 directory, which lets Tarbell find your project. This file can be empty, but
 also accepts several configuration options:</p>
 <blockquote>
-<div><ul class="simple">
-<li><tt class="docutils literal"><span class="pre">GOOGLE_DOC</span></tt>: A dict of Google docs parameters to access a spreadsheet.</li>
+<div><ul>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">GOOGLE_DOC</span></tt>: A dict of Google docs parameters to access a spreadsheet.</dt>
+<dd><p class="first">Takes <tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">account</span></tt>, and <tt class="docutils literal"><span class="pre">password</span></tt> parameters.</p>
+<p class="last">The default template stores account and password variables in a file
+called <tt class="docutils literal"><span class="pre">secrets.py</span></tt> in variable called <tt class="docutils literal"><span class="pre">GOOGLE_AUTH</span></tt>. <strong>Use
+secrets.py to keep your authentication information out of version
+control.</strong></p>
+</dd>
+</dl>
+</li>
 </ul>
-<p>Takes <tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">account</span></tt>, and <tt class="docutils literal"><span class="pre">password</span></tt> parameters.</p>
-<p>The default template stores account and password variables in a file
-called <tt class="docutils literal"><span class="pre">secrets.py</span></tt> in variable called <tt class="docutils literal"><span class="pre">GOOGLE_AUTH</span></tt>. <strong>Use secrets.py
-to keep your authentication information out of version control.</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">GOOGLE_DOC</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;key&#39;</span><span class="p">:</span> <span class="s">&quot;BIGLONGSTRINGOFLETTERSANDNUMBERS&quot;</span><span class="p">,</span>
     <span class="s">&#39;account&#39;</span><span class="p">:</span> <span class="s">&quot;some+account@gmail.com&quot;</span><span class="p">,</span>
@@ -80,58 +86,88 @@ to keep your authentication information out of version control.</strong></p>
 </pre></div>
 </div>
 <p>Default: <tt class="docutils literal"><span class="pre">False</span></tt></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">URL_ROOT</span></tt>: Override the published URL to differ from the directory
+name.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">URL_ROOT</span><span class="o">=</span><span class="s">&#39;totally-awesome-project&#39;</span>
+</pre></div>
+</div>
+<p>Default: <tt class="docutils literal"><span class="pre">None</span></tt> (publish using name of directory)</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">CREATE_JSON</span></tt>: If <tt class="docutils literal"><span class="pre">False</span></tt>, do not publish JSON data. Useful if
+spreadsheets contain secrets or sensitive information, and so should not
+be public.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">CREATE_JSON</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+</div>
+<p>Default: <tt class="docutils literal"><span class="pre">True</span></tt></p>
 </div></blockquote>
-<p>URL_ROOT: Override the published URL to differ from the directory name.</p>
-<p>URL_ROOT=&#8217;totally-awesome-project&#8217;
-Default: None (publish using name of directory)</p>
-<p>CREATE_JSON: If False, do not publish JSON data. Useful if spreadsheets contain secrets or sensitive information, and so should not be public.</p>
-<p>CREATE_JSON = False
-Default: True</p>
-<p>For advanced uses, you can turn your project into a Flask Blueprint in order to register template filters or dynamically set the template context.</p>
-<p>from flask import Blueprint
-blueprint = Blueprint(&#8216;awesome_project&#8217;, __name__)</p>
-<p># Register template filter
-&#64;blueprint.app_template_filter(&#8216;my_filter&#8217;)
-def my_filter(text):</p>
+<p>For advanced uses, you can turn your project into a Flask Blueprint in order to
+register template filters or dynamically set the template context.</p>
+<div class="highlight-python"><pre>from flask import Blueprint
+blueprint = Blueprint('awesome_project', __name__)
+
+# Register template filter
+@blueprint.app_template_filter('my_filter')
+def my_filter(text):
+   return text.strip()
+
+@blueprint.app_context_processor
+def context_processor():
+    """
+    Add "my_variable" to context
+    """
+    context = {
+        'my_variable': 'My variable would be more awesome in real life, like reading a file or API data.",
+    }
+
+    return context</pre>
+</div>
+<p>Now you can reference <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">my_variable</span> <span class="pre">}}</span></tt> in your templates, or call your
+filter on a template variable <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">my_variable|my_filter</span> <span class="pre">}}</span></tt>.</p>
+</div>
+<div class="section" id="base-project">
+<h2>Base project<a class="headerlink" href="#base-project" title="Permalink to this headline">¶</a></h2>
+<p>If any project contains a <tt class="docutils literal"><span class="pre">URL_ROOT</span> <span class="pre">=</span> <span class="pre">''</span></tt> configuration, that project will:</p>
 <blockquote>
-<div>return text.strip()</div></blockquote>
-<p>&#64;blueprint.app_context_processor
-def context_processor():</p>
-<blockquote>
-<div><p>&#8220;&#8221;&#8221;
-Add &#8220;my_variable&#8221; to context
-&#8220;&#8221;&#8221;
-context = {</p>
-<blockquote>
-<div>&#8216;my_variable&#8217;: &#8216;My variable would be more awesome in real life, like reading a file or API data.&#8221;,</div></blockquote>
-<p>}</p>
-<p>return context</p>
+<div><ul class="simple">
+<li>Be available at the root URL (<tt class="docutils literal"><span class="pre">/index.html</span></tt>, <tt class="docutils literal"><span class="pre">/css/style.css</span></tt>, etc).</li>
+<li>Always be published when deploying.</li>
+</ul>
 </div></blockquote>
-<p>Now you can reference {{ my_variable }} in your templates, or call your filter on a template variable {{ my_variable|my_filter }}.</p>
-<p>Base project</p>
-<p>If any project contains a URL_ROOT = &#8216;&#8217; configuration, that project will:</p>
-<p>Be available at the root URL (/index.html, /css/style.css, etc).
-Always be published when deploying.
-JSON publishing</p>
-<p>By default, every project&#8217;s Google spreadsheet will be baked out to a JSON file representing each worksheet. For example, most projects will have a myproject/json/values.json that represents the contents of the &#8220;values&#8221; worksheet.</p>
-<p>This means you can build pure Javascript apps using Tarbell in the framework of your choice. Just AJAX load or bootstrapping the JSON data.</p>
-<p>To disable this behavior, add a line to your config.py</p>
-<p>CREATE_JSON = False
-If you disable this behavior and need data available to Javascript applications, simply bootstrap the dataset provided it isn&#8217;t too big. Here&#8217;s something you might put in myproject/index.html:</p>
-<p>{% block scripts %}
-&lt;script type=&#8221;text/javascript&#8221;&gt;</p>
-<blockquote>
-<div><p>// Convert whole worksheet to JSON
-var authors = {{ authors|tojson }}</p>
-<p>// Filter a worksheet
-var locations = [ {% for address in locations %}</p>
-<blockquote>
-<div>{ state: &#8216;{{ address.state }}&#8217; },</div></blockquote>
-<p>{% endfor %} ];</p>
-<p>// Now process or display &#8216;authors&#8217; and &#8216;locations&#8217; ...</p>
-</div></blockquote>
-<p>&lt;/script&gt;
-{% endblock %}</p>
+</div>
+<div class="section" id="json-publishing">
+<h2>JSON publishing<a class="headerlink" href="#json-publishing" title="Permalink to this headline">¶</a></h2>
+<p>By default, every project&#8217;s Google spreadsheet will be baked out to a JSON file
+representing each worksheet. For example, most projects will have a
+<tt class="docutils literal"><span class="pre">myproject/json/values.json</span></tt> that represents the contents of the &#8220;values&#8221;
+worksheet.</p>
+<p>This means you can build pure Javascript apps using Tarbell in the framework of
+your choice. Just AJAX load or bootstrap the JSON data.</p>
+<p>To disable this behavior, add a line to your <tt class="docutils literal"><span class="pre">config.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">CREATE_JSON</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+</div>
+<p>If you disable this behavior and need data available to Javascript
+applications, simply bootstrap the dataset provided it isn&#8217;t too big. Here&#8217;s
+something you might put in <tt class="docutils literal"><span class="pre">myproject/index.html</span></tt>:</p>
+<div class="highlight-python"><pre>{% block scripts %}
+&lt;script type="text/javascript"&gt;
+    // Convert whole worksheet to JSON
+    var authors = {{ authors|tojson }}
+
+    // Filter a worksheet
+    var locations = [ {% for address in locations %}
+        { state: '{{ address.state }}' },
+    {% endfor %} ];
+
+    // Now process or display 'authors' and 'locations' ...
+&lt;/script&gt;
+{% endblock %}</pre>
+</div>
+</div>
 </div>
 
 
@@ -140,6 +176,16 @@ var locations = [ {% for address in locations %}</p>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Reference</a><ul>
+<li><a class="reference internal" href="#configuring-tarbell">Configuring Tarbell</a></li>
+<li><a class="reference internal" href="#base-project">Base project</a></li>
+<li><a class="reference internal" href="#json-publishing">JSON publishing</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="publish.html"
                         title="previous chapter">Publish a Project</a></p>
