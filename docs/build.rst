@@ -86,9 +86,7 @@ iterating through a list or, if a column named "key" is present, by reference
 to the value in that column. Some examples with a worksheet named **updates**
 should help make this clear.
 
-A worksheet called "updates"
-----------------------------
-
+**A worksheet called "updates"**
 
 ====== ================ ==========  ==================================================
 key    title            date        url

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Publish &mdash; Tarbell 0.8 documentation</title>
+    <title>Publish a Project &mdash; Tarbell 0.8 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Tarbell 0.8 documentation" href="index.html" />
     <link rel="next" title="Reference" href="reference.html" />
-    <link rel="prev" title="Build" href="build.html" /> 
+    <link rel="prev" title="Build a Project" href="build.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,7 +35,7 @@
           <a href="reference.html" title="Reference"
              accesskey="N">next</a></li>
         <li class="right" >
-          <a href="build.html" title="Build"
+          <a href="build.html" title="Build a Project"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">Tarbell 0.8 documentation</a> &raquo;</li> 
       </ul>
@@ -46,9 +46,88 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="publish">
-<h1>Publish<a class="headerlink" href="#publish" title="Permalink to this headline">¶</a></h1>
-<p>I am publishing!</p>
+  <div class="section" id="publish-a-project">
+<h1>Publish a Project<a class="headerlink" href="#publish-a-project" title="Permalink to this headline">¶</a></h1>
+<p><strong>Use fab deploy and fab project:&lt;projectname&gt; deploy to upload your project to
+Amazon S3. Customize the publishing process.</strong></p>
+<div class="section" id="amazon-s3-setup">
+<h2>Amazon S3 setup<a class="headerlink" href="#amazon-s3-setup" title="Permalink to this headline">¶</a></h2>
+<p>An Amazon S3 publishing workflow is included in the Tarbell template. To use
+it, you&#8217;ll need your <a class="reference external" href="https://portal.aws.amazon.com/gp/aws/developer/account/index.html?action=access-key">Amazon S3 credentials</a>.</p>
+<p>Create a file called <cite>s3config.py</cite> in your Tarbell template directory.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">S3CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;BUCKETNAME&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;bucket&#39;</span><span class="p">:</span> <span class="s">&#39;mybucket.domain.com&#39;</span><span class="p">,</span>
+        <span class="s">&#39;key&#39;</span><span class="p">:</span> <span class="s">&#39;KEY&#39;</span><span class="p">,</span>
+        <span class="s">&#39;key_id&#39;</span><span class="p">:</span> <span class="s">&#39;KEYID&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="help-i-don-t-have-an-amazon-s3-account">
+<h2>Help! I don&#8217;t have an Amazon S3 account.<a class="headerlink" href="#help-i-don-t-have-an-amazon-s3-account" title="Permalink to this headline">¶</a></h2>
+<p>Amazon S3 is simply online file storage &#8211; think of it as FTP on steroids.
+Setting up an Amazon S3 account is easy. Just check out <a class="reference external" href="http://www.hongkiat.com/blog/amazon-s3-the-beginners-guide/">this beginners guide</a>. If you want to
+use your S3 &#8220;bucket&#8221; as a website, read Amazon&#8217;s guide to <a class="reference external" href="http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">S3 website hosting</a>.</p>
+</div>
+<div class="section" id="deploying">
+<h2>Deploying<a class="headerlink" href="#deploying" title="Permalink to this headline">¶</a></h2>
+<p>Once your Amazon S3 access credentials are configured, deploying all projects is very simple:</p>
+<div class="highlight-python"><pre>fab target:BUCKETNAME deploy</pre>
+</div>
+<p>This will deploy to the bucket specified by BUCKETNAME in s3config.py.</p>
+<p>To simplify deploying to the bucket named production, simply run:</p>
+<div class="highlight-python"><pre>fab deploy</pre>
+</div>
+<p>When deploying you&#8217;ll see something like:</p>
+<div class="highlight-python"><pre>[localhost] local: python render_templates.py
+Rendering templates.
+
+Generating project 'base' in /Users/davideads/Repos/tarbell/out/
+-- No Google doc configured for base.
+
+Generating project 'readme' in /Users/davideads/Repos/tarbell/out/readme
+-- Created JSON /Users/davideads/Repos/tarbell/out/readme/json/values.json
+-- Created JSON /Users/davideads/Repos/tarbell/out/readme/json/LAST_UPDATED.json
+-- Created JSON /Users/davideads/Repos/tarbell/out/readme/json/projects.json
+-- Created page /Users/davideads/Repos/tarbell/out/readme/index.html
+
+[localhost] local: python s3deploy.py
+Deploying to tarbell.tribapps.com
+Uploading css/style.css
+Uploading js/app.js
+Uploading js/templates/nav.jst
+Uploading js/views/NavigationView.js
+Uploading readme/index.html
+Refreshing Facebook info for: http://tarbell.tribapps.com/readme/index.html?fbrefresh=CANBEANYTHING
+Uploading readme/bootstrap/css/bootstrap.css
+Uploading readme/bootstrap/css/bootstrap.min.css
+Uploading readme/bootstrap/img/glyphicons-halflings-white.png
+Uploading readme/bootstrap/img/glyphicons-halflings.png
+Uploading readme/bootstrap/js/bootstrap.js
+Uploading readme/bootstrap/js/bootstrap.min.js
+Uploading readme/css/ir_black.css
+Uploading readme/css/style.css
+Uploading readme/img/google-screenshot.jpg
+Uploading readme/img/html-edit-screenshot.jpg
+Uploading readme/img/ida-tarbell.jpg
+Uploading readme/img/s3-publish-screenshot.jpg
+Uploading readme/js/app.js
+Uploading readme/json/LAST_UPDATED.json
+Uploading readme/json/projects.json
+Uploading readme/json/values.json</pre>
+</div>
+<p>To deploy a specific project, use the <tt class="docutils literal"><span class="pre">project:PROJECTNAME</span></tt> flag:</p>
+<div class="highlight-python"><pre>fab project:PROJECTNAME deploy</pre>
+</div>
+<p>In the following example, we&#8217;ll publish a project called <tt class="docutils literal"><span class="pre">basketball</span></tt> using a
+bucket configuration named <tt class="docutils literal"><span class="pre">sports</span></tt>:</p>
+<div class="highlight-python"><pre>fab project:basketball target:sports deploy</pre>
+</div>
+<p><strong>Please note</strong>: The base template is always published &#8211; it is assumed most
+projects will use some base components.</p>
+</div>
 </div>
 
 
@@ -57,9 +136,19 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Publish a Project</a><ul>
+<li><a class="reference internal" href="#amazon-s3-setup">Amazon S3 setup</a></li>
+<li><a class="reference internal" href="#help-i-don-t-have-an-amazon-s3-account">Help! I don&#8217;t have an Amazon S3 account.</a></li>
+<li><a class="reference internal" href="#deploying">Deploying</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="build.html"
-                        title="previous chapter">Build</a></p>
+                        title="previous chapter">Build a Project</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="reference.html"
                         title="next chapter">Reference</a></p>
@@ -92,7 +181,7 @@
           <a href="reference.html" title="Reference"
              >next</a></li>
         <li class="right" >
-          <a href="build.html" title="Build"
+          <a href="build.html" title="Build a Project"
              >previous</a> |</li>
         <li><a href="index.html">Tarbell 0.8 documentation</a> &raquo;</li> 
       </ul>
