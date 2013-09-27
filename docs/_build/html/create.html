@@ -48,16 +48,17 @@
             
   <div class="section" id="create-a-project">
 <h1>Create a Project<a class="headerlink" href="#create-a-project" title="Permalink to this headline">¶</a></h1>
-<p><em>Get the *``client_secrets.json``</em> file if you don&#8217;t have it already. Use the
-<em>``fab newproject``</em> command to kick off a new project by copying a basic
-project structure and setting up a Google spreadsheet.*</p>
+<p><em>Get the client_secrets.json file if you don&#8217;t have it already. Use the fab
+newproject command to kick off a new project by copying a basic project
+structure and setting up a Google spreadsheet.</em></p>
 <div class="section" id="prerequisite-authenticating-with-google-with-client-secrets-json">
 <h2>Prerequisite: Authenticating with Google with client_secrets.json<a class="headerlink" href="#prerequisite-authenticating-with-google-with-client-secrets-json" title="Permalink to this headline">¶</a></h2>
 <p>Tarbell uses the Google Drive API to create new spreadsheets, which requires
 going through a little OAuth2 song-and-dance. This is optional but highly
 recommended, in part because Tarbell will probably use this technique for all
 authentication and access in the future. If you want to skip this step and
-configure your spreadsheet manually, see Manually creating Google spreadsheets.</p>
+configure your spreadsheet manually, see <a class="reference internal" href="#manually-creating-google-spreadsheets">Manually creating Google
+spreadsheets</a>.</p>
 <p>You ready? Let&#8217;s go.</p>
 <p>In order to allow Tarbell to create new Google Spreadsheets, you&#8217;ll need to
 download a <a class="reference external" href="https://developers.google.com/api-client-library/python/guide/aaa_client_secrets">client_secrets.json file</a>
@@ -142,8 +143,10 @@ create mode 100644 awesomeproject/templates/index.html</div></blockquote>
 <li>Run <cite>python runserver.py</cite> and view your project at <a class="reference external" href="http://localhost:5000/awesomeproject/">http://localhost:5000/awesomeproject/</a></li>
 </ul>
 <p>Run <cite>fab deploy</cite> and <cite>fab project:projectname deploy</cite> to deploy to S3 if you have a bucket configured.</p>
-<p>Done.
-Manually creating Google Spreadsheets</p>
+<p>Done.</p>
+</div>
+<div class="section" id="manually-creating-google-spreadsheets">
+<h2>Manually creating Google Spreadsheets<a class="headerlink" href="#manually-creating-google-spreadsheets" title="Permalink to this headline">¶</a></h2>
 <p>To manually set up a Google spreadsheet for your project:</p>
 <p>Create a new Google spreadsheet
 Rename &#8220;Sheet1&#8221; to &#8220;values&#8221;
@@ -167,6 +170,7 @@ Add credentials to projectname/secrets.py</p>
   <ul>
 <li><a class="reference internal" href="#">Create a Project</a><ul>
 <li><a class="reference internal" href="#prerequisite-authenticating-with-google-with-client-secrets-json">Prerequisite: Authenticating with Google with client_secrets.json</a></li>
+<li><a class="reference internal" href="#manually-creating-google-spreadsheets">Manually creating Google Spreadsheets</a></li>
 </ul>
 </li>
 </ul>

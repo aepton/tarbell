@@ -2,9 +2,9 @@
 Create a Project
 ================
 
-*Get the *``client_secrets.json``* file if you don't have it already. Use the
-*``fab newproject``* command to kick off a new project by copying a basic
-project structure and setting up a Google spreadsheet.*
+*Get the client_secrets.json file if you don't have it already. Use the fab
+newproject command to kick off a new project by copying a basic project
+structure and setting up a Google spreadsheet.*
 
 Prerequisite: Authenticating with Google with client_secrets.json
 =================================================================
@@ -12,7 +12,8 @@ Tarbell uses the Google Drive API to create new spreadsheets, which requires
 going through a little OAuth2 song-and-dance. This is optional but highly
 recommended, in part because Tarbell will probably use this technique for all
 authentication and access in the future. If you want to skip this step and
-configure your spreadsheet manually, see Manually creating Google spreadsheets.
+configure your spreadsheet manually, see `Manually creating Google
+spreadsheets`_.
 
 You ready? Let's go.
 
@@ -131,7 +132,9 @@ Welcome to Awesome project. Great work! What's next?
 Run `fab deploy` and `fab project:projectname deploy` to deploy to S3 if you have a bucket configured.
 
 Done.
+
 Manually creating Google Spreadsheets
+=====================================
 
 To manually set up a Google spreadsheet for your project:
 
