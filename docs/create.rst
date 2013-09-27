@@ -2,9 +2,9 @@
 Create a Project
 ================
 
-*Get the ``client_secrets.json`` file if you don't have it already. Use the
-``fab newproject`` command to kick off a new project by copying a basic project
-structure and setting up a Google spreadsheet.*
+*Get the *``client_secrets.json``* file if you don't have it already. Use the
+*``fab newproject``* command to kick off a new project by copying a basic
+project structure and setting up a Google spreadsheet.*
 
 Prerequisite: Authenticating with Google with client_secrets.json
 =================================================================
