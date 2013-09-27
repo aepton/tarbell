@@ -58,14 +58,12 @@ Amazon S3 publishing workflow and basic framework for building modern web apps
 using Tarbell.</p>
 <p>Make sure you have <tt class="docutils literal"><span class="pre">python</span></tt> (2.6+), <tt class="docutils literal"><span class="pre">git</span></tt>, <tt class="docutils literal"><span class="pre">pip</span></tt>, <tt class="docutils literal"><span class="pre">virtualenv</span></tt> and
 <tt class="docutils literal"><span class="pre">virtualenv-wrapper</span></tt> installed on your system.</p>
-<dl class="docutils">
-<dt>::</dt>
-<dd><tt class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/newsapps/tarbell</span>
-<span class="pre">cd</span> <span class="pre">tarbell</span>
-<span class="pre">mkvirtualenv</span> <span class="pre">tarbell</span>
-<span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span>
-<span class="pre">python</span> <span class="pre">runserver.py</span></tt></dd>
-</dl>
+<div class="highlight-python"><pre>git clone https://github.com/newsapps/tarbell
+cd tarbell
+mkvirtualenv tarbell
+pip install -r requirements.txt
+python runserver.py</pre>
+</div>
 <p>Now visit <a class="reference external" href="http://localhost:5000/readme">http://localhost:5000/readme</a> in your browser. You should see the
 latest version of this page.</p>
 <div class="section" id="how-do-i-install-these-tools-on-my-system">

@@ -16,11 +16,12 @@ Make sure you have ``python`` (2.6+), ``git``, ``pip``, ``virtualenv`` and
 ``virtualenv-wrapper`` installed on your system.
 
 ::
-    ``git clone https://github.com/newsapps/tarbell
+
+    git clone https://github.com/newsapps/tarbell
     cd tarbell
     mkvirtualenv tarbell
     pip install -r requirements.txt
-    python runserver.py``
+    python runserver.py
 
 Now visit http://localhost:5000/readme in your browser. You should see the
 latest version of this page.
