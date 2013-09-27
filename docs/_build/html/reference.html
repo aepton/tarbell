@@ -24,14 +24,14 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Tarbell 0.8 documentation" href="index.html" />
-    <link rel="prev" title="Publish" href="publish.html" /> 
+    <link rel="prev" title="Publish a Project" href="publish.html" /> 
   </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="publish.html" title="Publish"
+          <a href="publish.html" title="Publish a Project"
              accesskey="P">previous</a></li>
         <li><a href="index.html">Tarbell 0.8 documentation</a> &raquo;</li> 
       </ul>
@@ -44,7 +44,86 @@
             
   <div class="section" id="reference">
 <h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
-<p>I am referencing!</p>
+<p><em>Configure Tarbell, set up a Flask Blueprint, special base project.</em></p>
+<p>Configuring Tarbell</p>
+<p>When your project was created, a <tt class="docutils literal"><span class="pre">config.py</span></tt> file was created in the project
+directory, which lets Tarbell find your project. This file can be empty, but
+also accepts several configuration options:</p>
+<blockquote>
+<div><p><tt class="docutils literal"><span class="pre">GOOGLE_DOC</span></tt>: A dict of Google docs parameters to access a spreadsheet.
+Takes <tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">account</span></tt>, and <tt class="docutils literal"><span class="pre">password</span></tt> parameters.</p>
+<p>The default template stores account and password variables in a file
+called <tt class="docutils literal"><span class="pre">secrets.py</span></tt> in variable called <tt class="docutils literal"><span class="pre">GOOGLE_AUTH</span></tt>. <strong>Use secrets.py
+to keep your authentication information out of version control.</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">GOOGLE_DOC</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;key&#39;</span><span class="p">:</span> <span class="s">&quot;BIGLONGSTRINGOFLETTERSANDNUMBERS&quot;</span><span class="p">,</span>
+    <span class="s">&#39;account&#39;</span><span class="p">:</span> <span class="s">&quot;some+account@gmail.com&quot;</span><span class="p">,</span>
+    <span class="s">&#39;password&#39;</span><span class="p">:</span> <span class="s">&quot;++GmailPassWord++&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>DEFAULT_CONTEXT: Default context variables to make available to all project templates.</p>
+<dl class="docutils">
+<dt>DEFAULT_CONTEXT = {</dt>
+<dd>&#8216;ad_path&#8217;: &#8216;&#8217;,
+&#8216;analytics_path&#8217;: &#8216;&#8217;,</dd>
+</dl>
+<p>}
+DONT_PUBLISH: If True, this project will not be published to S3.</p>
+<p>DONT_PUBLISH=True
+Default: False</p>
+<p>URL_ROOT: Override the published URL to differ from the directory name.</p>
+<p>URL_ROOT=&#8217;totally-awesome-project&#8217;
+Default: None (publish using name of directory)</p>
+<p>CREATE_JSON: If False, do not publish JSON data. Useful if spreadsheets contain secrets or sensitive information, and so should not be public.</p>
+<p>CREATE_JSON = False
+Default: True</p>
+<p>For advanced uses, you can turn your project into a Flask Blueprint in order to register template filters or dynamically set the template context.</p>
+<p>from flask import Blueprint
+blueprint = Blueprint(&#8216;awesome_project&#8217;, __name__)</p>
+<p># Register template filter
+&#64;blueprint.app_template_filter(&#8216;my_filter&#8217;)
+def my_filter(text):</p>
+<blockquote>
+<div>return text.strip()</div></blockquote>
+<p>&#64;blueprint.app_context_processor
+def context_processor():</p>
+<blockquote>
+<div><p>&#8220;&#8221;&#8221;
+Add &#8220;my_variable&#8221; to context
+&#8220;&#8221;&#8221;
+context = {</p>
+<blockquote>
+<div>&#8216;my_variable&#8217;: &#8216;My variable would be more awesome in real life, like reading a file or API data.&#8221;,</div></blockquote>
+<p>}</p>
+<p>return context</p>
+</div></blockquote>
+<p>Now you can reference {{ my_variable }} in your templates, or call your filter on a template variable {{ my_variable|my_filter }}.</p>
+<p>Base project</p>
+<p>If any project contains a URL_ROOT = &#8216;&#8217; configuration, that project will:</p>
+<p>Be available at the root URL (/index.html, /css/style.css, etc).
+Always be published when deploying.
+JSON publishing</p>
+<p>By default, every project&#8217;s Google spreadsheet will be baked out to a JSON file representing each worksheet. For example, most projects will have a myproject/json/values.json that represents the contents of the &#8220;values&#8221; worksheet.</p>
+<p>This means you can build pure Javascript apps using Tarbell in the framework of your choice. Just AJAX load or bootstrapping the JSON data.</p>
+<p>To disable this behavior, add a line to your config.py</p>
+<p>CREATE_JSON = False
+If you disable this behavior and need data available to Javascript applications, simply bootstrap the dataset provided it isn&#8217;t too big. Here&#8217;s something you might put in myproject/index.html:</p>
+<p>{% block scripts %}
+&lt;script type=&#8221;text/javascript&#8221;&gt;</p>
+<blockquote>
+<div><p>// Convert whole worksheet to JSON
+var authors = {{ authors|tojson }}</p>
+<p>// Filter a worksheet
+var locations = [ {% for address in locations %}</p>
+<blockquote>
+<div>{ state: &#8216;{{ address.state }}&#8217; },</div></blockquote>
+<p>{% endfor %} ];</p>
+<p>// Now process or display &#8216;authors&#8217; and &#8216;locations&#8217; ...</p>
+</div></blockquote>
+<p>&lt;/script&gt;
+{% endblock %}</p>
 </div>
 
 
@@ -55,7 +134,7 @@
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="publish.html"
-                        title="previous chapter">Publish</a></p>
+                        title="previous chapter">Publish a Project</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/reference.txt"
@@ -82,7 +161,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="publish.html" title="Publish"
+          <a href="publish.html" title="Publish a Project"
              >previous</a></li>
         <li><a href="index.html">Tarbell 0.8 documentation</a> &raquo;</li> 
       </ul>
