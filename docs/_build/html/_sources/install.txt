@@ -15,6 +15,7 @@ using Tarbell.
 Make sure you have ``python`` (2.6+), ``git``, ``pip``, ``virtualenv`` and
 ``virtualenv-wrapper`` installed on your system.
 
+::
     ``git clone https://github.com/newsapps/tarbell
     cd tarbell
     mkvirtualenv tarbell
