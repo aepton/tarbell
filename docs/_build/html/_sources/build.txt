@@ -13,15 +13,11 @@ Project layout
 A Tarbell template project directory structure looks like this:
 
     - ``config.py``: Configuration file. Required to detect the project.
-    - ``secrets.py``: Set ``GOOGLE_AUTH`` variable to configure authentication.
-      Not tracked by Git.
-    - ``templates``: The templates directory contains Jinja templates that will
-      be published at ``/projectname/TEMPLATENAME.html``.
+    - ``secrets.py``: Set ``GOOGLE_AUTH`` variable to configure authentication. Not tracked by Git.
+    - ``templates``: The templates directory contains Jinja templates that will be published at ``/projectname/TEMPLATENAME.html``.
         + ``index.html``: A basic template to start building with.
-    - ``static``: The static directory contains static assets like images, CSS,
-      and Javascript. They are published at ``/projectname/FILENAME``.
-        + ``js/app.js``: An skeleton Javascript application for your project
-          that is automatically loaded by base template.
+    - ``static``: The static directory contains static assets like images, CSS, and Javascript. They are published at ``/projectname/FILENAME``.
+        + ``js/app.js``: An skeleton Javascript application for your project that is automatically loaded by base template.
         + ``css/style.css``: An empty stylesheet for your project.
 
 What's the difference between static assets and templates?
