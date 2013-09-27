@@ -28,54 +28,73 @@ Log in to the `Google API Developer Console
 
 .. image:: create_1.png
 
-Create client screenshot
-
 Now click the "Services" tab and enable Google Drive API.
 
-Enable Drive API
+.. image:: create_2.png
 
 Click the "API Access" tab to create a client ID:
 
-Create client ID
+.. image:: create_3.png
 
 Add some project details. These don't really matter:
 
-Client ID details screen
+.. image:: create_4.png
 
 This is the important screen. Select "installed app" and "other":
 
-Create ID important screen
+.. image:: create_5.png
 
-Whew! Now you can download the client_secrets.json file:
+Whew! Now you can download the ``client_secrets.json`` file:
 
-Download client_secrets.json
+.. image:: create_6.png
 
 Now put the file in the root directory of your Tarbell installation.
 
-The first time you run fab newproject and answer yes to create a Google spreadsheet, your default browser will open and you will be prompted to grant your Tarbell client access to your API key.
+The first time you run ``fab newproject`` and answer yes to create a Google
+spreadsheet, your default browser will open and you will be prompted to grant
+your Tarbell client access to your API key.
 
-Grant client access
+.. image:: create_7.png
 
-The fab newproject command will prompt you if the client_secrets.json file doesn't exist.
+The ``fab newproject`` command will prompt you if the ``client_secrets.json``
+file doesn't exist.
 
-The first time you create a new project and spreadsheet, make sure you are not running any services on port 8080, such as MAMP. The Python Google API client library fires up a tiny little server on port 8080 to receive and store an access token during this cycle. Because the access token is stored, you won't need to do again unless your token is revoked. You can restore any port 8080 services indefinitely.
+**The first time you create a new project and spreadsheet, make sure you are
+not running any services on port 8080, such as MAMP.** The Python Google API
+client library fires up a tiny little server on port 8080 to receive and store
+an access token during this cycle. Because the access token is stored, you
+won't need to do again unless your token is revoked. You can restore any port
+8080 services indefinitely.
 
-Help us improve! We know this step is a little rocky. We'd like to make it smoother. If you are an OAuth or Google Drive API expert, we need your help. See #21 Improve OAuth workflow for newproject command and #22 Use Drive API in Tarbell library.
+**Help us improve!** We know this step is a little rocky. We'd like to make it
+smoother. If you are an OAuth or Google Drive API expert, we need your help.
+See `#21 Improve OAuth workflow for newproject command
+<https://github.com/newsapps/tarbell/issues/21>`_ and `#22 Use Drive API in
+Tarbell library <https://github.com/newsapps/tarbell/issues/22>`_.
 
 Create a project
+================
 
-To create your first project, use the handy fab command:
+To create your first project, use the handy ``fab`` command:
 
-fab newproject
-You'll be prompted with a series of questions. Here's what you'll see the first time you it with user input highlighted.
+::
 
-What is the directory name for the project? awesomeproject
-What is your project's full title? Awesome project
-Do you want a Google doc associated with this project? [Y/n]: y
-Generating Google spreadsheet
-What Google account should have access to this spreadsheet initially? (e.g. my.name@gmail.com) somebody@gmail.com
-Authenticating your Google account to use Tarbell. If any services are running on
-port 8080, disable them and run this command again.
+    fab newproject
+
+You'll be prompted with a series of questions. Here's what you'll see the first
+time you it with user input highlighted.
+
+::
+
+    What is the directory name for the project? awesomeproject
+    What is your project's full title? Awesome project
+    Do you want a Google doc associated with this project? [Y/n]: y
+    Generating Google spreadsheet
+    What Google account should have access to this spreadsheet initially? (e.g.
+    my.name@gmail.com) somebody@gmail.com
+    Authenticating your Google account to use Tarbell. If any services are
+    running on
+    port 8080, disable them and run this command again.
 
 Your browser has been opened to visit:
 

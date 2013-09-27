@@ -66,34 +66,51 @@ to access the Google Drive API. You can share this file with collaborators and
 within your organization, but do not share this file anywhere public.</p>
 <p>Log in to the <a class="reference external" href="https://code.google.com/apis/console/">Google API Developer Console</a> and create a new project:</p>
 <img alt="_images/create_1.png" src="_images/create_1.png" />
-<p>Create client screenshot</p>
 <p>Now click the &#8220;Services&#8221; tab and enable Google Drive API.</p>
-<p>Enable Drive API</p>
+<img alt="_images/create_2.png" src="_images/create_2.png" />
 <p>Click the &#8220;API Access&#8221; tab to create a client ID:</p>
-<p>Create client ID</p>
+<img alt="_images/create_3.png" src="_images/create_3.png" />
 <p>Add some project details. These don&#8217;t really matter:</p>
-<p>Client ID details screen</p>
+<img alt="_images/create_4.png" src="_images/create_4.png" />
 <p>This is the important screen. Select &#8220;installed app&#8221; and &#8220;other&#8221;:</p>
-<p>Create ID important screen</p>
-<p>Whew! Now you can download the client_secrets.json file:</p>
-<p>Download client_secrets.json</p>
+<img alt="_images/create_5.png" src="_images/create_5.png" />
+<p>Whew! Now you can download the <tt class="docutils literal"><span class="pre">client_secrets.json</span></tt> file:</p>
+<img alt="_images/create_6.png" src="_images/create_6.png" />
 <p>Now put the file in the root directory of your Tarbell installation.</p>
-<p>The first time you run fab newproject and answer yes to create a Google spreadsheet, your default browser will open and you will be prompted to grant your Tarbell client access to your API key.</p>
-<p>Grant client access</p>
-<p>The fab newproject command will prompt you if the client_secrets.json file doesn&#8217;t exist.</p>
-<p>The first time you create a new project and spreadsheet, make sure you are not running any services on port 8080, such as MAMP. The Python Google API client library fires up a tiny little server on port 8080 to receive and store an access token during this cycle. Because the access token is stored, you won&#8217;t need to do again unless your token is revoked. You can restore any port 8080 services indefinitely.</p>
-<p>Help us improve! We know this step is a little rocky. We&#8217;d like to make it smoother. If you are an OAuth or Google Drive API expert, we need your help. See #21 Improve OAuth workflow for newproject command and #22 Use Drive API in Tarbell library.</p>
-<p>Create a project</p>
-<p>To create your first project, use the handy fab command:</p>
-<p>fab newproject
-You&#8217;ll be prompted with a series of questions. Here&#8217;s what you&#8217;ll see the first time you it with user input highlighted.</p>
-<p>What is the directory name for the project? awesomeproject
-What is your project&#8217;s full title? Awesome project
+<p>The first time you run <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">newproject</span></tt> and answer yes to create a Google
+spreadsheet, your default browser will open and you will be prompted to grant
+your Tarbell client access to your API key.</p>
+<img alt="_images/create_7.png" src="_images/create_7.png" />
+<p>The <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">newproject</span></tt> command will prompt you if the <tt class="docutils literal"><span class="pre">client_secrets.json</span></tt>
+file doesn&#8217;t exist.</p>
+<p><strong>The first time you create a new project and spreadsheet, make sure you are
+not running any services on port 8080, such as MAMP.</strong> The Python Google API
+client library fires up a tiny little server on port 8080 to receive and store
+an access token during this cycle. Because the access token is stored, you
+won&#8217;t need to do again unless your token is revoked. You can restore any port
+8080 services indefinitely.</p>
+<p><strong>Help us improve!</strong> We know this step is a little rocky. We&#8217;d like to make it
+smoother. If you are an OAuth or Google Drive API expert, we need your help.
+See <a class="reference external" href="https://github.com/newsapps/tarbell/issues/21">#21 Improve OAuth workflow for newproject command</a> and <a class="reference external" href="https://github.com/newsapps/tarbell/issues/22">#22 Use Drive API in
+Tarbell library</a>.</p>
+</div>
+<div class="section" id="id1">
+<h2>Create a project<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>To create your first project, use the handy <tt class="docutils literal"><span class="pre">fab</span></tt> command:</p>
+<div class="highlight-python"><pre>fab newproject</pre>
+</div>
+<p>You&#8217;ll be prompted with a series of questions. Here&#8217;s what you&#8217;ll see the first
+time you it with user input highlighted.</p>
+<div class="highlight-python"><pre>What is the directory name for the project? awesomeproject
+What is your project's full title? Awesome project
 Do you want a Google doc associated with this project? [Y/n]: y
 Generating Google spreadsheet
-What Google account should have access to this spreadsheet initially? (e.g. <a class="reference external" href="mailto:my&#46;name&#37;&#52;&#48;gmail&#46;com">my<span>&#46;</span>name<span>&#64;</span>gmail<span>&#46;</span>com</a>) <a class="reference external" href="mailto:somebody&#37;&#52;&#48;gmail&#46;com">somebody<span>&#64;</span>gmail<span>&#46;</span>com</a>
-Authenticating your Google account to use Tarbell. If any services are running on
-port 8080, disable them and run this command again.</p>
+What Google account should have access to this spreadsheet initially? (e.g.
+my.name@gmail.com) somebody@gmail.com
+Authenticating your Google account to use Tarbell. If any services are
+running on
+port 8080, disable them and run this command again.</pre>
+</div>
 <p>Your browser has been opened to visit:</p>
 <blockquote>
 <div><a class="reference external" href="https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.file&amp;redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&amp;response_type=code&amp;client_id=000000000000.apps.googleusercontent.com&amp;access_type=offline">https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.file&amp;redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&amp;response_type=code&amp;client_id=000000000000.apps.googleusercontent.com&amp;access_type=offline</a></div></blockquote>
@@ -170,6 +187,7 @@ Add credentials to projectname/secrets.py</p>
   <ul>
 <li><a class="reference internal" href="#">Create a Project</a><ul>
 <li><a class="reference internal" href="#prerequisite-authenticating-with-google-with-client-secrets-json">Prerequisite: Authenticating with Google with client_secrets.json</a></li>
+<li><a class="reference internal" href="#id1">Create a project</a></li>
 <li><a class="reference internal" href="#manually-creating-google-spreadsheets">Manually creating Google Spreadsheets</a></li>
 </ul>
 </li>
