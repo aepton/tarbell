@@ -162,14 +162,14 @@ Manually creating Google Spreadsheets
 
 To manually set up a Google spreadsheet for your project:
 
-    -Create a new Google spreadsheet
-    -Rename "Sheet1" to "values"
-    -Add 'key' and 'value' column headers in the first row
-    -Add the spreadsheet key in projectname/config.py
-    -Public access:
-        -Set the spreadsheet to 'publish to the web'
-    -Private access:
-        -Grant access to a special user account (you'll be storing password in
+    - Create a new Google spreadsheet
+    - Rename "Sheet1" to "values"
+    - Add 'key' and 'value' column headers in the first row
+    - Add the spreadsheet key in projectname/config.py
+    - Public access:
+        - Set the spreadsheet to 'publish to the web'
+    - Private access:
+        - Grant access to a special user account (you'll be storing password in
         the clear, so set up a new account for this)
-        -Add credentials to projectname/secrets.py
+        - Add credentials to projectname/secrets.py
 
